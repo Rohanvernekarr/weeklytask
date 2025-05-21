@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weekly Task Planner</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f2f4f8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    .day-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .day-link {
+      text-align: center;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #000;
+      font-size: 18px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      font-weight: bold;    
+    }
+
+    .day-link:hover {
+      transform: translateY(-4px);
+      background-color: #eaf4ff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Select a Day to View Tasks</h1>
+  <div class="day-grid">
+    {% for day in days %}
+      <a class="day-link" href="{% url 'day_task' day %}">{{ day|capfirst }}</a>
+    {% endfor %}
+  </div>
+</body>
+</html>
