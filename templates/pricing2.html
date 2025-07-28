@@ -1,0 +1,40 @@
+ {% extends "./common.html" %}
+
+{%block content %}
+
+
+<div>
+        <h5 class="text-muted text-center">Pricing</h5>
+        <h1 class="text-center">Easily organize your work. Start free.</h1>
+        <h5 class="text-muted text-center">Access our features. No credit card required.</h5>
+    
+        <div class="row d-flex justify-content-center">
+            {% for item in  item %}
+                <div class="col-3 m-3 card">
+                    <div class="card-header">
+                        <h5>{{item.title| capfirst}}</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-title">{{item.text|capfirst}}</p>
+                        <p class="card-text"><span class="fw-bold"> <br />{{item.price|capfirst}}</p>
+                        <a href="#" class="btn btn-primary mb-2">Get started</a>
+        
+                        <p class="card-text">text</p>
+                        <ul>
+                            <li>Unlimited tasks</li>
+                            <li>Unlimited tasks</li>
+                            <li>Basic search filters</li>
+                            <li>List view projects</li>
+                        </ul>
+                    </div>
+                
+                </div>
+            {% endfor %}
+             
+        </div>
+    </div>
+
+{%endblock%}
+
+
+ 

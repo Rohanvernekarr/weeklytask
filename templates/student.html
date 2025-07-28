@@ -1,0 +1,8 @@
+{% comment %} <input type='text'placeholder='enter name' name='name'>
+<input type='number'placeholder='enter age' name='age'> {% endcomment %}
+<form class="form" method="post" novalidate>
+    {% csrf_token %}
+    {{student_data.as_div}}
+
+    <button type="submit">add</button>
+</form>
