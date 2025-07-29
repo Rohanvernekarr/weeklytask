@@ -1,5 +1,10 @@
-from django.urls import path
+from django.urls import path,include
 from .import views
+from rest_framework.routers import DefaultRouter
+from .views import TaskViewSet
+
+router = DefaultRouter()
+router.register(r'tasks', TaskViewSet)
 
 urlpatterns=[
     path('',views.landingpageview,name='home'),  # Root path for homepage
@@ -15,5 +20,7 @@ urlpatterns=[
     path('logout', views.logoutview, name='logout'),
     #DASHBOARD PAGE
     path('dashboard',views.dashboardview,name='dashboard'),
+    path('api/', include(router.urls)),
+
     
 ]

@@ -5,6 +5,9 @@ from django.contrib import messages
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from rest_framework import viewsets
+from .serializers import TaskSerializer
+from .models import Task
 
 list1=[
     {"title": "title1", "text":"card-1text","price":"us$100"},
@@ -97,3 +100,13 @@ def dashboardview(request):
     return render(request,'dashboard.html')
 
 # Create your views here.
+class TaskViewSet(viewsets.ModelViewSet):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+
+
+
+
+
+
+
