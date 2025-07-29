@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import Contactform,studentform
+from .forms import Contactform,studentform,RegisterForm
 from django.contrib import messages
 from django.views.decorators.csrf import ensure_csrf_cookie
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 list1=[
     {"title": "title1", "text":"card-1text","price":"us$100"},
@@ -60,9 +61,17 @@ def studentview(request):
 @ensure_csrf_cookie
 def registerview(request):
     if request.method == 'POST':
-        # TODO: Add registration logic here (e.g., save user)
-        return redirect('dashboard')
-    return render(request, 'register.html')
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()  # This saves the user to database
+            print(f"User created: {user.username}")  # Debug print
+            messages.success(request, "Registration successful! Please login.")
+            return redirect('login')
+        else:
+            print(f"Form errors: {form.errors}")  # Debug print
+    else:
+        form = RegisterForm()
+    return render(request, 'register.html', {'form': form})
 
 def loginview(request):
     error = None
@@ -77,8 +86,13 @@ def loginview(request):
             error = 'Invalid username or password.'
     return render(request, 'login.html', {'error': error})
 
+def logoutview(request):
+    logout(request)
+    return redirect('home')
+
 #DASHBOARD PAGE
 
+@login_required
 def dashboardview(request):
     return render(request,'dashboard.html')
 

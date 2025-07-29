@@ -12,6 +12,8 @@ urlpatterns=[
     path('student',views.studentview,name='student'),
     path('register',views.registerview,name='register'),
     path('login', views.loginview, name='login'),
+    path('logout', views.logoutview, name='logout'),
     #DASHBOARD PAGE
     path('dashboard',views.dashboardview,name='dashboard'),
+    
 ]
